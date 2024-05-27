@@ -1,0 +1,215 @@
+import {
+  FormControl,
+  Box,
+  Input,
+  FormErrorMessage,
+  Textarea,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
+import { Formik, Form } from "formik";
+import emailjs from "emailjs-com";
+
+interface FormData {
+  name: string;
+  company: string;
+  projectName: string;
+  email: string;
+  description: string;
+}
+
+const initialValues: FormData = {
+  name: "",
+  company: "",
+  email: "",
+  projectName: "",
+  description: "",
+};
+
+const ContactForm = () => {
+  const toast = useToast();
+
+  const validateData = (values: FormData) => {
+    const errors: Partial<FormData> = {};
+    if (!values.name) {
+      errors.name = "Name is required";
+    }
+    if (!values.company) {
+      errors.company = "Company is required";
+    }
+    if (!values.projectName) {
+      errors.projectName = "Project name is required";
+    }
+    if (!values.email) {
+      errors.email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+    if (!values.description) {
+      errors.description = "Description is required";
+    }
+
+    return errors;
+  };
+  const delay = (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+  const handleSubmit = async (
+    values: FormData,
+    {
+      setSubmitting,
+      resetForm,
+    }: {
+      setSubmitting: (isSubmitting: boolean) => void;
+      resetForm: (values: FormData) => void;
+    }
+  ) => {
+    // Your form submission logic goes here
+
+    setSubmitting(true);
+    await delay(2000);
+    const templateParams = {
+      from_name: values.name,
+      message: values.description,
+      company: values.company,
+      project_name: values.projectName,
+      client_email: values.email,
+    };
+
+    emailjs
+      .send(
+        `${import.meta.env.VITE_SERVICE_ID}`,
+        `${import.meta.env.VITE_TEMPLATE_ID}`,
+        templateParams,
+        `${import.meta.env._PUBLIC_ID}`
+      )
+      .then(
+        (response) => {
+          toast({
+            title: "Thank You!",
+            description: "We've recieved your email.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          resetForm({
+            name: "",
+            description: "",
+            projectName: "",
+            company: "",
+            email: "",
+          });
+          console.log("SUCCESS!", response.status, response.text);
+          setSubmitting(false);
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          setSubmitting(false);
+        }
+      );
+  };
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validate={validateData}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        isSubmitting,
+      }) => (
+        <Form>
+          <Box mb={4}>
+            <FormControl isInvalid={(errors?.name && touched?.name) || false}>
+              <Input
+                type="text"
+                name="name"
+                value={values.name}
+                placeholder="Name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <FormErrorMessage>{errors.name}</FormErrorMessage>
+            </FormControl>
+          </Box>
+          <Box mb={4}>
+            <FormControl isInvalid={(errors?.email && touched?.email) || false}>
+              <Input
+                type="text"
+                name="email"
+                value={values.email}
+                placeholder="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <FormErrorMessage>{errors.email}</FormErrorMessage>
+            </FormControl>
+          </Box>
+          <Box mb={4}>
+            <FormControl
+              isInvalid={(errors?.company && touched?.company) || false}
+            >
+              <Input
+                type="text"
+                name="company"
+                value={values.company}
+                placeholder="Company"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <FormErrorMessage>{errors.company}</FormErrorMessage>
+            </FormControl>
+          </Box>
+          <Box mb={4}>
+            <FormControl
+              isInvalid={(errors?.projectName && touched?.projectName) || false}
+            >
+              <Input
+                type="text"
+                name="projectName"
+                value={values.projectName}
+                placeholder="Project name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <FormErrorMessage>{errors.projectName}</FormErrorMessage>
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl
+              isInvalid={(errors?.description && touched?.description) || false}
+            >
+              <Textarea
+                className="contact-textarea"
+                name="description"
+                value={values.description}
+                placeholder="How can we help you?"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                resize="none"
+              />
+              <FormErrorMessage>{errors.description}</FormErrorMessage>
+            </FormControl>
+          </Box>
+
+          <Button
+            mt={4}
+            variant="custom"
+            isLoading={isSubmitting}
+            loadingText="Submitting"
+            isDisabled={isSubmitting}
+            type="submit"
+          >
+            Submit{" "}
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default ContactForm;

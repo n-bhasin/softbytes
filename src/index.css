@@ -1,0 +1,170 @@
+body {
+  background-color: "#f9f9f9";
+}
+input::placeholder {
+  color: #b3b3b3;
+}
+textarea::placeholder {
+  color: #b3b3b3;
+}
+.realistic-marker-highlight {
+  position: relative;
+  color: #ffffff;
+  font-size: 32px;
+  /* margin-left: 15px; */
+  font-weight: 500;
+}
+.realistic-marker-highlight:before {
+  content: "";
+  background-color: #f07f2f;
+  /* background-image: url("./assets/marker-shape.svg"); */
+  width: 52%;
+  transform: rotate(-1.5deg);
+  height: 1.8em;
+  position: absolute;
+  z-index: -1;
+  filter: url(#marker-shape);
+  left: -0.22em;
+  top: -0.05em;
+  padding: 0 0.4em;
+}
+.reach-us {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+.techimages {
+  height: 72px;
+  width: 92px;
+}
+.technames {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a0a0a0;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+.aboutImage {
+  position: relative;
+  top: -20px;
+  height: 425px;
+  width: 550px;
+  background-position: "cover";
+}
+.navlinks {
+  cursor: pointer;
+}
+.navlinks:hover {
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.navbarlogo {
+  height: 60px;
+}
+.footerlogo {
+  width: 180px;
+  height: 100px;
+}
+.footerdisplayondesktop {
+  display: block;
+}
+.footerdisplayonmobile {
+  display: none;
+}
+.contact-textarea {
+  height: 120px !important;
+}
+@media screen and (max-width: 1024px) {
+  .contactUs {
+    padding: 10px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .navbarlogo {
+    height: 50px;
+  }
+  .footerlogo {
+    width: 200px;
+    height: 75px;
+  }
+  .footerdisplayondesktop {
+    display: none;
+  }
+  .footerdisplayonmobile {
+    display: block;
+  }
+  .realistic-marker-highlight:before {
+    content: "";
+    background-color: #f07f2f;
+    /* background-image: url("./assets/marker-shape.svg"); */
+    width: 70%;
+    transform: rotate(-1.5deg);
+    height: 1.8em;
+    position: absolute;
+    z-index: -1;
+    filter: url(#marker-shape);
+    left: -0.22em;
+    top: -0.05em;
+    padding: 0 0.4em;
+  }
+  .techimages {
+    width: 72px;
+    height: 48px;
+  }
+  .technames {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .navbarlogo {
+    height: 40px;
+  }
+  .footerlogo {
+    width: 150px;
+    height: 75px;
+  }
+  .realistic-marker-highlight:before {
+    content: "";
+    background-color: #f07f2f;
+    /* background-image: url("./assets/marker-shape.svg"); */
+    width: 76%;
+    transform: rotate(-1.5deg);
+    height: 1.8em;
+    position: absolute;
+    z-index: -1;
+    filter: url(#marker-shape);
+    left: -0.22em;
+    top: -0.05em;
+    padding: 0 0.4em;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .footerlogo {
+    width: 100px;
+    height: 50px;
+  }
+  .realistic-marker-highlight:before {
+    content: "";
+    background-color: #f07f2f;
+    /* background-image: url("./assets/marker-shape.svg"); */
+    width: 92%;
+    transform: rotate(-1.5deg);
+    height: 1.8em;
+    position: absolute;
+    z-index: -1;
+    filter: url(#marker-shape);
+    left: -0.22em;
+    top: -0.05em;
+    padding: 0 0.4em;
+  }
+}
