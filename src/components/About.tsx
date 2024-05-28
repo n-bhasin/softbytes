@@ -24,10 +24,6 @@ const About = () => {
           spacing={{ base: 10, sm: 10, md: 15 }}
         >
           <Box>
-            {/* <Image
-              src="https://softbytes.s3.amazonaws.com/about7.png"
-              objectFit="cover"
-            /> */}
             <Image src={Aboutimage} objectFit="cover" />
           </Box>
 

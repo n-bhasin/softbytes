@@ -99,7 +99,7 @@ const ContactForm = () => {
             company: "",
             email: "",
           });
-          console.log("SUCCESS!", response.status, response.text);
+          console.log("SUCCESSS!", response.status, response.text);
           setSubmitting(false);
         },
         (err) => {
