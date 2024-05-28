@@ -81,7 +81,7 @@ const ContactForm = () => {
         `${import.meta.env.VITE_SERVICE_ID}`,
         `${import.meta.env.VITE_TEMPLATE_ID}`,
         templateParams,
-        `${import.meta.env._PUBLIC_ID}`
+        `${import.meta.env.VITE_PUBLIC_ID}`
       )
       .then(
         (response) => {
@@ -99,11 +99,17 @@ const ContactForm = () => {
             company: "",
             email: "",
           });
-          console.log("SUCCESS!", response.status, response.text);
+
           setSubmitting(false);
         },
         (err) => {
-          console.log("FAILED...", err);
+          toast({
+            title: "Sorry!",
+            description: "Failed to send your message.",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
           setSubmitting(false);
         }
       );
