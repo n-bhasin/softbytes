@@ -99,10 +99,11 @@ const ContactForm = () => {
             company: "",
             email: "",
           });
-
+          console.log("SUCCESS!", response.status, response.text);
           setSubmitting(false);
         },
         (err) => {
+          console.log("FAILED...", err);
           toast({
             title: "Sorry!",
             description: "Failed to send your message.",
