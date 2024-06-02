@@ -1,6 +1,18 @@
-import { Box, Divider, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  SimpleGrid,
+  Text,
+  HStack,
+  Image,
+  VStack,
+  Link,
+} from "@chakra-ui/react";
 import ContactForm from "./ContactForm";
 import Title from "./Title";
+
+import Telegram from "../assets/telegram.png";
+import Whatsapp from "../assets/whatsapp.png";
 
 const ContactUs = () => {
   return (
@@ -51,13 +63,26 @@ const ContactUs = () => {
               </filter>
             </defs>
           </svg>
-          <Box mt={10}>
+          <Box mt={14}>
             <Text fontSize={{ base: "12px", sm: "sm" }} className="reach-us">
               Reach us at
             </Text>
-            <Text fontSize={{ base: "lg", sm: "lg", md: "2xl" }} as="b">
-              hello@softbytes.ca
-            </Text>
+            <HStack mt={10} mb={4}>
+              <Link href="https://telegram.me/softbytes">
+                <Image src={Telegram} boxSize="50px" objectFit="cover" />
+              </Link>
+              <Link href="https://wa.me/+128942235263">
+                <Image src={Whatsapp} objectFit="cover" boxSize="50px" />
+              </Link>
+            </HStack>
+            <VStack align="left" gap={0}>
+              <Text fontSize={{ base: "lg", sm: "lg", md: "2xl" }} as="b">
+                <Link href="mailto:hello@softbytes.ca">hello@softbytes.ca</Link>
+              </Text>
+              <Text fontSize={{ base: "lg", sm: "lg", md: "2xl" }} as="b">
+                <Link href="tel:+12894415263">+1(289) 442 5263</Link>
+              </Text>
+            </VStack>
           </Box>
         </Box>
         <Box mt={3}>
